@@ -1,11 +1,183 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
 
 @theme {
-  --color-accent: #2563eb;
-  --color-accent-light: #3b82f6;
-  --color-marked: #dcfce7;
-  --color-marked-border: #22c55e;
-  --color-bingo: #fbbf24;
+  /* Dark Cyberpunk Palette */
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #14141a;
+  --color-surface: #1a1a24;
+  --color-surface-light: #242430;
+  
+  /* Chrome Gradients */
+  --color-chrome-light: #e8e8e8;
+  --color-chrome: #c0c0c0;
+  --color-chrome-dark: #909090;
+  --color-chrome-darker: #606060;
+  
+  /* Neon Accents */
+  --color-neon-cyan: #00ffff;
+  --color-neon-cyan-dim: #00d4ff;
+  --color-neon-magenta: #ff00ff;
+  --color-neon-magenta-dim: #ff00aa;
+  --color-neon-blue: #00d4ff;
+  --color-neon-gold: #ffd700;
+  
+  /* Legacy mappings (for gradual migration) */
+  --color-accent: #00ffff;
+  --color-accent-light: #00d4ff;
+  --color-marked: #1a1a24;
+  --color-marked-border: #00ffff;
+  --color-bingo: #ffd700;
+  
+  /* Font Families */
+  --font-family-heading: 'Orbitron', system-ui, sans-serif;
+  --font-family-body: 'Rajdhani', system-ui, sans-serif;
+}
+
+/* Chrome Gradient CSS Variables */
+:root {
+  --gradient-chrome: linear-gradient(
+    135deg,
+    #e8e8e8 0%,
+    #c0c0c0 25%,
+    #ffffff 50%,
+    #c0c0c0 75%,
+    #909090 100%
+  );
+  
+  --gradient-chrome-dark: linear-gradient(
+    135deg,
+    #909090 0%,
+    #606060 50%,
+    #909090 100%
+  );
+  
+  --gradient-chrome-animated: linear-gradient(
+    110deg,
+    #909090 0%,
+    #c0c0c0 30%,
+    #ffffff 50%,
+    #c0c0c0 70%,
+    #909090 100%
+  );
+  
+  --gradient-neon-glow: radial-gradient(
+    circle,
+    rgba(0, 255, 255, 0.4) 0%,
+    rgba(0, 212, 255, 0.2) 50%,
+    transparent 100%
+  );
+  
+  --gradient-dark-bg: radial-gradient(
+    ellipse at top,
+    #14141a 0%,
+    #0a0a0f 100%
+  );
+  
+  /* Neon Shadows */
+  --shadow-neon-cyan: 0 0 10px rgba(0, 255, 255, 0.6),
+                      0 0 20px rgba(0, 255, 255, 0.4),
+                      0 0 30px rgba(0, 255, 255, 0.2);
+  
+  --shadow-neon-magenta: 0 0 10px rgba(255, 0, 255, 0.6),
+                         0 0 20px rgba(255, 0, 255, 0.4),
+                         0 0 30px rgba(255, 0, 255, 0.2);
+  
+  --shadow-neon-gold: 0 0 10px rgba(255, 215, 0, 0.6),
+                      0 0 20px rgba(255, 215, 0, 0.4),
+                      0 0 30px rgba(255, 215, 0, 0.2);
+  
+  --shadow-chrome-inset: inset 0 2px 4px rgba(0, 0, 0, 0.5),
+                         inset 0 -2px 4px rgba(255, 255, 255, 0.1);
+  
+  --shadow-chrome-3d: 0 4px 8px rgba(0, 0, 0, 0.6),
+                      0 2px 4px rgba(0, 0, 0, 0.4),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Animation Keyframes */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.4);
+  }
+}
+
+@keyframes neon-pulse-glow {
+  0%, 100% {
+    box-shadow: var(--shadow-neon-cyan);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8),
+                0 0 40px rgba(0, 255, 255, 0.6),
+                0 0 60px rgba(0, 255, 255, 0.4);
+  }
+}
+
+@keyframes scanlines {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+@keyframes hologram-flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  75% {
+    opacity: 0.98;
+  }
+}
+
+@keyframes slide-in-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes chrome-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes neon-border-rotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
 }
 
 html,
@@ -16,6 +188,79 @@ body,
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-family-body);
+  background: var(--gradient-dark-bg);
+  background-attachment: fixed;
+  color: #e8e8e8;
   -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-chrome-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-chrome);
+}
+
+/* Custom Cursor (optional - can be applied to specific elements) */
+.cursor-neon {
+  cursor: crosshair;
+}
+
+/* Utility Classes */
+.chrome-text {
+  background: var(--gradient-chrome-animated);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+.glass-morph {
+  background: rgba(26, 26, 36, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(192, 192, 192, 0.2);
+}
+
+.neon-glow-cyan {
+  box-shadow: var(--shadow-neon-cyan);
+}
+
+.neon-glow-magenta {
+  box-shadow: var(--shadow-neon-magenta);
+}
+
+.neon-glow-gold {
+  box-shadow: var(--shadow-neon-gold);
+}
+
+/* Scanline Overlay Effect */
+.scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 255, 0.03) 2px,
+    rgba(0, 255, 255, 0.03) 4px
+  );
+  pointer-events: none;
+  animation: scanlines 8s linear infinite;
+  z-index: 1;
 }
